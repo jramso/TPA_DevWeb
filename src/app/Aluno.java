@@ -8,7 +8,7 @@ package app;
  * programas de teste para redigir os relatórios.
  */
 
-public class Aluno  {
+public class Aluno implements Comparador<Aluno>{
     private int matricula;
     private String nome;
 
