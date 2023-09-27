@@ -5,7 +5,7 @@ package app;
  * @author victoriocarvalho
  * 
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 
- * programas de teste para redigir os relatórios.
+ * programas de teste para redigir os relatórios..
  */
 
 public class Aluno implements Comparador<Aluno>{
