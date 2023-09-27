@@ -12,23 +12,44 @@ import java.util.Comparator;
  *
  * @author victoriocarvalho
  */
-public class ArvoreBinariaExemplo<T> implements IArvoreBinaria<T> {
+public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
-    protected NoExemplo<T> raiz = null;
+    protected No<T> raiz = null;
     protected Comparator<T> comparador; 
     
-    protected NoExemplo<T> atual = null;
-    private ArrayList<NoExemplo<T>> pilhaNavegacao = null;
+    protected No<T> atual = null;
+    private ArrayList<No<T>> pilhaNavegacao = null;
 
-    public ArvoreBinariaExemplo(Comparator<T> comp) {
-        comparador = comp;
+    public ArvoreBinaria(Comparator<T> comp) {
+        this.comparador = comp;
     }
+    
     
 
     @Override
     public void adicionar(T novoValor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.raiz = adicionaRecursivo(this.raiz, novoValor);
+
     }
+
+    private No<T> adicionaRecursivo(No<T> no,T novoValor){
+        if(no==null){ 
+            return new No<>(novoValor);
+        }
+
+        if(comparador.compare(novoValor, no.getValor()) < 0){
+            no.setFilhoEsquerda(adicionaRecursivo(no.getFilhoEsquerda(), novoValor));
+
+        } else if(comparador.compare(novoValor, no.getValor()) > 0){
+            no.setFilhoDireita(adicionaRecursivo(no.getFilhoDireita(), novoValor));
+        }
+
+        //adicionar quando a comparação for igual a 0
+        return no;
+    
+    }
+   
 
     @Override
     public T pesquisar(T valor) {

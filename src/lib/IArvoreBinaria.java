@@ -29,7 +29,7 @@ public interface IArvoreBinaria<T> {
      */
     public void adicionar(T novoValor);
     
-    
+
     /**
      * Método para pesquisar por um elemento na árvore e retorná-lo.
      * @param valor - será utilizado para passar o valor da chave a ser buscada. Por exemplo, se for um árvore de Alunos indexada por nome, deve-se passar um objeto do tipo aluno com o nome que se deseja buscar.
