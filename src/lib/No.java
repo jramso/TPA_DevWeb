@@ -25,21 +25,6 @@ public class No<T> {
     public T getValor() {
         return valor;
     }
-
-   public int obterAltura(No<T> no) {
-       
-        if (no == null) 
-            return -1;
-        else {
-            int alturaDireita = obterAltura(no.filhoDireita);
-            int alturaEsquerda = obterAltura((no.filhoEsquerda));
-            
-            if (alturaDireita > alturaEsquerda) 
-                return alturaDireita + 1;    
-            else
-                return alturaEsquerda + 1;
-        }
-    }
             
     public void setValor(T valor) {
         this.valor = valor;
