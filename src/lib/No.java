@@ -31,8 +31,8 @@ public class No<T> {
         if (no == null) 
             return -1;
         else {
-            int alturaDireita = obterAltura(no.filhoDireita());
-            int alturaEsquerda = obterAltura(no.filhoEsquerda());
+            int alturaDireita = obterAltura(no.filhoDireita);
+            int alturaEsquerda = obterAltura((no.filhoEsquerda));
             
             if (alturaDireita > alturaEsquerda) 
                 return alturaDireita + 1;    
