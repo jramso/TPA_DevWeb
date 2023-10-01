@@ -71,8 +71,8 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         if (no == null) 
             return -1;
         else {
-            int alturaDireita = obterAltura(no.filhoDireita);
-            int alturaEsquerda = obterAltura((no.filhoEsquerda));
+            int alturaDireita = altura(no.getFilhoDireita());
+            int alturaEsquerda = altura((no.getFilhoEsquerda()));
             
             if (alturaDireita > alturaEsquerda) 
                 return alturaDireita + 1;    
@@ -90,12 +90,47 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     public String caminharEmNivel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
     }
+
+    public void caminhaEmNivel(){
+        ArrayList<No<T>> fila = new ArrayList<No<T>>();
+        if (this.raiz == null)
+            System.out.println("Caminhamento por Nível - Árvore Vazia");
+        else{
+            System.out.println("Caminhamento por Nível: ");
+            No<T> atual;
+            fila.add(this.raiz);
+            while (fila.size() > 0 ){
+                
+                atual = fila.get(0);
+                fila.remove(0);
+                System.out.println(atual.getValor() + " - " + altura(atual));
+                if (atual.getFilhoEsquerda() != null)
+                    fila.add(atual.getFilhoEsquerda());
+                if (atual.getFilhoDireita() != null){
+                    fila.add(atual.getFilhoDireita());
+                }                          
+            }
+        }
+    }
     
     @Override
     public String caminharEmOrdem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
     }
     
+    public void caminhaEmOrdem(){
+        System.out.println("Saída do Caminhamento em Ordem");
+        caminhaEmOrdem(this.raiz);
+        System.out.println("Fim da Saída do Caminhamento em Ordem");
+    }
+
+    private void caminhaEmOrdem(No<T> raiz) {
+        if(raiz != null){
+            caminhaEmOrdem(raiz.getFilhoEsquerda());
+            System.out.println(raiz.getValor());
+            caminhaEmOrdem(raiz.getFilhoDireita());
+        }
+    }
     
     @Override
     public T obterProximo(){
@@ -107,4 +142,5 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+} 
 }
