@@ -82,7 +82,18 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public int quantidadeNos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return quantidadeNosRecursiva(this.raiz);
+    }
+
+    private int quantidadeNosRecursiva(No no){
+        
+        if (no == null){
+            return 0;
+        }
+        else{
+            return (quantidadeNosRecursiva(no.getFilhoEsquerda()) + quantidadeNosRecursiva(no.getFilhoDireita()) + 1);
+        }
     }
 
     @Override
@@ -142,4 +153,4 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
     
 } 
-}
+
