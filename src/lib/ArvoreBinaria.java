@@ -62,16 +62,17 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
     @Override
     public int altura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int alt = alturaRecursivo(this.raiz);
+        return alt;
     }
 
-    public int altura(No<T> no) {
+    private int alturaRecursivo(No<T> no) {
        
         if (no == null) 
             return -1;
         else {
-            int alturaDireita = altura(no.getFilhoDireita());
-            int alturaEsquerda = altura((no.getFilhoEsquerda()));
+            int alturaDireita = alturaRecursivo(no.getFilhoDireita());
+            int alturaEsquerda = alturaRecursivo((no.getFilhoEsquerda()));
             
             if (alturaDireita > alturaEsquerda) 
                 return alturaDireita + 1;    
@@ -113,7 +114,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                 
                 atual = fila.get(0);
                 fila.remove(0);
-                System.out.println(atual.getValor() + " - " + altura(atual));
+                System.out.println(atual.getValor() + " - " + alturaRecursivo(atual));
                 if (atual.getFilhoEsquerda() != null)
                     fila.add(atual.getFilhoEsquerda());
                 if (atual.getFilhoDireita() != null){
