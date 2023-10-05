@@ -75,7 +75,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
            return pesquisar(no.getFilhoEsquerda(),valor);
         }else{
             //busca a direita
-            return pesquisar(no.filhoDireita(),valor)
+            return pesquisar(no.getFilhoDireita(),valor)
         }
     }
 
