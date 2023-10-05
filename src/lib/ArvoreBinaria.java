@@ -53,7 +53,30 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public T pesquisar(T valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pesquisar(raiz,valor);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private T pesquisar(No<T> no,T valor){
+        //confere se foi passado o no da arvore )(raiz)
+        if (no == null){
+            return null;
+        }
+        //compara com a "raiz"
+        int comparar = valor.compareTo(no.valor)
+
+        
+        if (comparar==0){
+            //encontrado
+            return no.valor;
+        
+        }else if (comparar<0){
+            //busca a esquerda
+           return pesquisar(no.filhoEsquerda,valor);
+        }else{
+            //busca a direita
+            return pesquisar(no.filhoDireita,valor)
+        }
     }
 
     @Override
