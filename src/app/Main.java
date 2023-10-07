@@ -3,6 +3,7 @@ package app;
 import java.util.Comparator;
 
 import lib.ArvoreBinaria;
+import lib.IArvoreBinaria;
 
 public class Main {
 
@@ -10,6 +11,8 @@ public class Main {
         String nome = "Magaghab";
         Aluno aluno = new Aluno(123, "Jud");
         Aluno aluno2 = new Aluno(123,"Ped");
+        GeradorDeArvores gerador = new GeradorDeArvores();
+        IArvoreBinaria<Aluno> arv;
 
         ComparadorAlunoPorMatricula comp = new ComparadorAlunoPorMatricula();
 

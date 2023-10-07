@@ -11,6 +11,7 @@ import java.util.Comparator;
 /**
  *
  * @author victoriocarvalho
+ * @author jramso
  */
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
