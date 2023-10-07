@@ -129,14 +129,14 @@ public class GeradorDeArvores {
         //Senão essa recursão acabou...
         if (min <= max){
             //Calculo a matrícula média desta geração e insiro um aluno com essa matrícula na árvore
-            int media = (min+max)/2; // 5 -> 2 -> 1 ->>
+            int media = (min+max)/2; // 
             int matricula = matriculaBase+media; 
             String nome = geraNomeCompleto();
             arv.adicionar(new Aluno(matricula,nome));
             //Chamo recursivamente para continuar inserindo os elementos com matrículas menores que a média
-            geraArvorePerfeitamenteBalanceada(min,media-1,arv); // (1,4)5 , (1,2)2, (1,1)1, (1,0)X,>> 
+            geraArvorePerfeitamenteBalanceada(min,media-1,arv); // (1,4)5 , (1,2)2, (1,1)1,>>, (3,4)3, (4,4)4>> (6,10)8, (6,7)6, (7,7)7, >> (9,10)9, (10,10)10
             //Chamo recursivamente para continuar inserindo os elementos com matrículas maiores que a média
-            geraArvorePerfeitamenteBalanceada(media+1,max,arv); // (6,10)8, (6,9)7, (6,6)6, (6,5)X >>
+            geraArvorePerfeitamenteBalanceada(media+1,max,arv); //
         }
     }
 

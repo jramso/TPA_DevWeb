@@ -18,8 +18,11 @@ public class Main {
 
        // ArvoreBinaria <Aluno> arvore = new ArvoreBinaria<Aluno>(comp);
        // No no = arvore.adicionar(aluno);
-        System.out.println(comp.compare(aluno, aluno2));
-
+        //System.out.println(comp.compare(aluno, aluno2));
+        arv = new ArvoreBinaria(comp);
+        gerador.geraArvorePerfeitamenteBalanceada(1,10,arv);
+        System.out.println("Árvore Perfeitamente Balanceada Criada");
+        System.out.println("Altura: " + arv.altura());
     }
     
 }
