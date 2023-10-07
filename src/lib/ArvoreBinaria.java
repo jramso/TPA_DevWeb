@@ -174,8 +174,14 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public void reiniciarNavegacao(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        this.atual = this.raiz;
+
+        while (this.atual.getFilhoEsquerda() != null)
+        {
+            this.atual = this.atual.getFilhoEsquerda();
+        }
     }
-    
 } 
 
