@@ -63,19 +63,19 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             return null;
         }
         //compara com a "raiz"
-        int comparar = valor.compareTo(no.valor)
+        int comparar = comparador.compare(raiz.getValor(),valor);
 
         
         if (comparar==0){
             //encontrado
-            return no.valor;
+            return no.getValor();
         
         }else if (comparar<0){
             //busca a esquerda
            return pesquisar(no.getFilhoEsquerda(),valor);
         }else{
             //busca a direita
-            return pesquisar(no.getFilhoDireita(),valor)
+            return pesquisar(no.getFilhoDireita(),valor);
         }
     }
 
