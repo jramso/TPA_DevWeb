@@ -134,7 +134,8 @@ public class GeradorDeArvores {
             String nome = geraNomeCompleto();
             arv.adicionar(new Aluno(matricula,nome));
             //Chamo recursivamente para continuar inserindo os elementos com matrículas menores que a média
-            geraArvorePerfeitamenteBalanceada(min,media-1,arv); // (1,4)5 , (1,2)2, (1,1)1,>>, (3,4)3, (4,4)4>> (6,10)8, (6,7)6, (7,7)7, >> (9,10)9, (10,10)10
+            // (1,4)5 , (1,2)2, (1,1)1,>>, (3,4)3, (4,4)4>> (6,10)8, (6,7)6, (7,7)7, >> (9,10)9, (10,10)10
+            geraArvorePerfeitamenteBalanceada(min,media-1,arv); 
             //Chamo recursivamente para continuar inserindo os elementos com matrículas maiores que a média
             geraArvorePerfeitamenteBalanceada(media+1,max,arv); //
         }
