@@ -149,23 +149,24 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
     
     @Override
+
     public String caminharEmOrdem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
+        return "[" + caminharEmOrdem(this.raiz) + "]";
     }
     
-    public void caminhaEmOrdem(){
-        System.out.println("Saída do Caminhamento em Ordem");
-        caminhaEmOrdem(this.raiz);
-        System.out.println("Fim da Saída do Caminhamento em Ordem");
-    }
-
-    private void caminhaEmOrdem(No<T> raiz) {
-        if(raiz != null){
-            caminhaEmOrdem(raiz.getFilhoEsquerda());
-            System.out.println(raiz.getValor());
-            caminhaEmOrdem(raiz.getFilhoDireita());
+    private String caminharEmOrdem(No<T> raiz) {
+        if (raiz == null) {
+            return "";
         }
+    
+        String resultado = "";
+        resultado += caminharEmOrdem(raiz.getFilhoEsquerda());
+        resultado += raiz.getValor() + " ";
+        resultado += caminharEmOrdem(raiz.getFilhoDireita());
+    
+        return resultado;
     }
+    
     
     @Override
     public T obterProximo(){
@@ -183,5 +184,9 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             this.atual = this.atual.getFilhoEsquerda();
         }
     }
+
+
+    
+
 } 
 

@@ -21,8 +21,12 @@ public class Main {
         //System.out.println(comp.compare(aluno, aluno2));
         arv = new ArvoreBinaria(comp);
         gerador.geraArvorePerfeitamenteBalanceada(1,10,arv);
+
+        
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Altura: " + arv.altura());
+
+        System.out.println(arv.caminharEmOrdem());
     }
     
 }
