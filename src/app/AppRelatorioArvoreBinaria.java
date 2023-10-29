@@ -63,10 +63,12 @@ public class AppRelatorioArvoreBinaria {
         gerador.geraArvorePerfeitamenteBalanceada(1,50000,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Altura: " + arv.altura());
+        
         arv = new ArvoreBinaria(comparador);
-        gerador.geraArvoreDegenerada(50000, arv);
+        gerador.geraArvoreDegenerada(100, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println(" Altura: " + arv.altura());
+        
 //------Fim do trecho citado na questão 9 do relatório-------------------------------
     }
 }

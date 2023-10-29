@@ -2,74 +2,73 @@ package lib;
 
 import java.util.Comparator;
 
-public class ArvoreAVL <T>extends ArvoreBinaria<T>{
-    
+public class ArvoreAVL<T> extends ArvoreBinaria<T> {
 
     public ArvoreAVL(Comparator<T> comparator) {
         super(comparator);
     }
 
-    protected No<T> addRecursivo( No<T> raiz, No<T> novo){
-        raiz = super.adicionaRecursivo(raiz,novo);
-        //Continuar implementando essa
-
-
-        return raiz;
+    public void adicionar(T novoValor){
+        No <T> novoNo = new No<>(novoValor);
+        this.raiz = adicionaRecursivo(this.raiz, novoNo);
     }
 
-    @Override
-protected No<T> adicionaRecursivo(No<T> atual, No<T> novoValor){
-        atual = super.adicionaRecursivo(atual, novoValor);
-
-        int fatorDeBalanceamento = atual.fatorDeBalanceamento();
-
-        if(fatorBalanceamento > 1){
-            if((atual.getFilhoDireita().fatorDeBalanceamento() > 0)){
-                atual = rotacaoEsquerda(atual); 
-            }else{
-                atual = rotacaoDireitaEsquerda(atual); 
+    protected No<T> adicionaRecursivo(No<T> no,No<T> novoValor){
+        raiz = super.adicionaRecursivo(no, novoValor);
+          
+        if (fatorDeBalanceamento(raiz) > 1) {
+            if (fatorDeBalanceamento(raiz.getFilhoDireita()) > 0) {
+                raiz = rotacaoEsquerda(raiz);
+            } else {
+                raiz = rotacaoDireitaEsquerda(raiz);
             }
-        } else if(fatorDeBalanceamento < -1){
-            if((atual.getFilhoEsquerda().fatorDeBalanceamento() < 0)){
-                atual = rotacaoDiretita(atual); 
-            }else{
-                atual = rotacaoEsquerdaDireita(atual); 
+        } else if (fatorDeBalanceamento(raiz) < -1) {
+            if (fatorDeBalanceamento(raiz.getFilhoEsquerda()) < 0) {
+                raiz = rotacaoDireita(raiz);
+            } else {
+                raiz = rotacaoEsquerdaDireita(raiz);
+                
             }
         }
-
-        return atual;
+    
+        return raiz;
     }
-
-    private No<T> rotacaoEsquerda(No<T> no){
-        No <T> noAuxiliar = no.getFilhoDireita();
+    
+    private No<T> rotacaoEsquerda(No<T> no) {
+        No<T> noAuxiliar = no.getFilhoDireita();
         no.setFilhoDireita(noAuxiliar.getFilhoEsquerda());
         noAuxiliar.setFilhoEsquerda(no);
 
         return noAuxiliar;
     }
 
-    private No<T> rotacaoEsquerdaDireita(No<T> no){
+    private No<T> rotacaoEsquerdaDireita(No<T> no) {
         no.setFilhoEsquerda(rotacaoEsquerda(no.getFilhoEsquerda()));
         return rotacaoDireita(no);
     }
 
-    private No<T> rotacaoDireita(No<T> no){
-        No <T> noAuxiliar = no.getFilhoEsquerda();
+    private No<T> rotacaoDireita(No<T> no) {
+        No<T> noAuxiliar = no.getFilhoEsquerda();
         no.setFilhoEsquerda(noAuxiliar.getFilhoDireita());
         noAuxiliar.setFilhoDireita(no);
 
         return noAuxiliar;
     }
 
-    private Node<T> rotacaoDireitaEsquerda(No<T> no){
+    private No<T> rotacaoDireitaEsquerda(No<T> no) {
         no.setFilhoDireita(rotacaoDireita(no.getFilhoDireita()));
         return rotacaoEsquerda(no);
     }
-    
 
-    public int fatorDeBalanceamento(){
-        return alturaRecursivo(this.raiz.getFilhoDireita()) - alturaRecursivo(this.raiz.getFilhoEsquerda());
-    
-    //Implementar métodos para efetuar o balanceamento e sobrescrever método de adicionar elemento...
+
+    public int fatorDeBalanceamento(No<T> no) {
+        int alturaDireita = alturaRecursivo(no.getFilhoDireita());
+        int alturaEsquerda = alturaRecursivo(no.getFilhoEsquerda());
+        return alturaDireita - alturaEsquerda;
     }
+
+    // Outros métodos da classe
+
+    // Lembre-se de implementar os métodos de balanceamento
+
 }

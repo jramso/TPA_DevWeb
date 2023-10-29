@@ -11,7 +11,6 @@ import java.util.Comparator;
 /**
  *
  * @author victoriocarvalho
- * @author jramso
  */
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
@@ -24,25 +23,23 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     public ArvoreBinaria(Comparator<T> comp) {
         this.comparador = comp;
     }
-    
-    
 
     @Override
     public void adicionar(T novoValor) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        this.raiz = adicionaRecursivo(this.raiz, novoValor);
+        No <T> novoNo = new No<>(novoValor);
+        this.raiz = adicionaRecursivo(this.raiz, novoNo);
 
     }
 
-    private No<T> adicionaRecursivo(No<T> no,T novoValor){
+    protected No<T> adicionaRecursivo(No<T> no,No<T> novoValor){
         if(no==null){ 
-            return new No<>(novoValor);
+            return novoValor;
         }
 
-        if(comparador.compare(novoValor, no.getValor()) < 0){
+        if(comparador.compare(novoValor.getValor(), no.getValor()) < 0){
             no.setFilhoEsquerda(adicionaRecursivo(no.getFilhoEsquerda(), novoValor));
 
-        } else if(comparador.compare(novoValor, no.getValor()) > 0){
+        } else if(comparador.compare(novoValor.getValor(), no.getValor()) > 0){
             no.setFilhoDireita(adicionaRecursivo(no.getFilhoDireita(), novoValor));
         }
 
@@ -64,7 +61,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             return null;
         }
         //compara com a "raiz"
-        int comparar = comparador.compare(raiz.getValor(),valor);
+        int comparar = comparador.compare(valor, no.getValor());
 
         
         if (comparar==0){
@@ -90,7 +87,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return alt;
     }
 
-    private int alturaRecursivo(No<T> no) {
+    protected int alturaRecursivo(No<T> no) {
        
         if (no == null) 
             return -1;
@@ -149,24 +146,23 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
     
     @Override
-
     public String caminharEmOrdem() {
-        return "[" + caminharEmOrdem(this.raiz) + "]";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
     }
     
-    private String caminharEmOrdem(No<T> raiz) {
-        if (raiz == null) {
-            return "";
+    public void caminhaEmOrdem(){
+        System.out.println("Saída do Caminhamento em Ordem");
+        caminhaEmOrdem(this.raiz);
+        System.out.println("Fim da Saída do Caminhamento em Ordem");
+    }
+
+    private void caminhaEmOrdem(No<T> raiz) {
+        if(raiz != null){
+            caminhaEmOrdem(raiz.getFilhoEsquerda());
+            System.out.println(raiz.getValor());
+            caminhaEmOrdem(raiz.getFilhoDireita());
         }
-    
-        String resultado = "";
-        resultado += caminharEmOrdem(raiz.getFilhoEsquerda());
-        resultado += raiz.getValor() + " ";
-        resultado += caminharEmOrdem(raiz.getFilhoDireita());
-    
-        return resultado;
     }
-    
     
     @Override
     public T obterProximo(){
@@ -175,18 +171,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public void reiniciarNavegacao(){
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
-        this.atual = this.raiz;
-
-        while (this.atual.getFilhoEsquerda() != null)
-        {
-            this.atual = this.atual.getFilhoEsquerda();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
     
-
+    public int fatorDeBalanceamento(){
+        return alturaRecursivo(this.raiz.getFilhoDireita()) - alturaRecursivo(this.raiz.getFilhoEsquerda());
+    }
+    
 } 
 
