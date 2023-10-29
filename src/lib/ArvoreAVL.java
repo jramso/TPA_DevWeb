@@ -67,8 +67,5 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
         return alturaDireita - alturaEsquerda;
     }
 
-    // Outros métodos da classe
-
-    // Lembre-se de implementar os métodos de balanceamento
 
 }
