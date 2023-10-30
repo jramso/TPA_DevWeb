@@ -20,6 +20,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     protected No<T> atual = null;
     private ArrayList<No<T>> pilhaNavegacao = null;
     private No<T> proximoNo = null;
+    private No<T> paiNo;
 
 
     public ArvoreBinaria(Comparator<T> comp) {
@@ -54,10 +55,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public T pesquisar(T valor) {
-        return pesquisar(raiz,valor);
+        return pesquisar(raiz,valor).getValor();
     }
 
-    private T pesquisar(No<T> no,T valor){
+    private No<T> pesquisar(No<T> no,T valor){
         if (no == null){
             return null;
         }
@@ -67,13 +68,15 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         
         if (comparar==0){
             //encontrado
-            return no.getValor();
+            return no;
         
         }else if (comparar<0){
             //busca a esquerda
+            paiNo = no;
            return pesquisar(no.getFilhoEsquerda(),valor);
         }else{
             //busca a direita
+            paiNo = no;
             return pesquisar(no.getFilhoDireita(),valor);
         }
     }
@@ -84,21 +87,70 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
 
     private T removerNo(No<T> no, T valor) {
-        No<T> paiNo;
+       
 
-        while(no != null && comparador.compare(no.getValor(), valor) != 0){
-            paiNo = no;
-            if(comparador.compare(no.getValor(), valor) > 0){
-                no = no.getFilhoEsquerda();
+        //nó atual não for nulo e diferente do nó a ser removido
+        No<T> removido = pesquisar(no, valor);
+        if (removido==null){
+            System.out.println("Elemento nao encontrado!");
+            return null;
+        }else{
+
+            //se o no a ser removido nao tiver filhos
+            if (removido.getFilhoDireita()==null && removido.getFilhoEsquerda() == null){
+                if(paiNo!=null){
+                    //se o no a ser removido for o da esquerda, o Pai recebe filho a esquerda como null
+                    if(comparador.compare(removido.getValor(), paiNo.getValor()) < 0){
+                        paiNo.setFilhoEsquerda(null);
+                    }else{
+                        paiNo.setFilhoDireita(null);
+                    }
+                }else{
+                    //no a ser removido é o pai/raiz
+                    raiz.setValor(null);
+                }
+            
             }else{
-                no = no.getFilhoDireita();
+                // entao tem filho
+                //tem filho so a esquerda
+                if(removido.getFilhoDireita()==null){
+                    //no pai fica com filho
+                    //criado pelo avo
+                    paiNo.setFilhoEsquerda(removido.getFilhoEsquerda());
+                    removido.setFilhoEsquerda(null);
+                //tem filho so a direita
+                }else if(removido.getFilhoEsquerda()==null){
+                    //no pai fica com filho
+                    //criado pelo avo
+                    paiNo.setFilhoDireita(removido.getFilhoDireita());
+                    removido.setFilhoDireita(null);
+                }else{
+                    //tem os dois filhos
+                    //pega o maior filho a esquerda dele
+                    No<T> maiorEsquerda = encontrarMaiorFilhoEsquerda(removido.getFilhoEsquerda());
+
+                    maiorEsquerda.setFilhoDireita(removido.getFilhoDireita());
+                    maiorEsquerda.setFilhoEsquerda(removido.getFilhoEsquerda());
+                    //procura o maior a esquerda de novo em removidos para remover o pai do maiorEsquerda
+                    pesquisar(removido, maiorEsquerda.getValor());
+                    //removido o ciclo
+                    paiNo.setFilhoDireita(null);
+
+                }
             }
         }
 
-        return valor;
+        return removido.getValor();
     }
    
-
+    private No<T> encontrarMaiorFilhoEsquerda(No<T> no) {
+        if (no.getFilhoDireita() == null) {
+            return no; // Não há filho à direita, então este é o maior valor à esquerda
+        }
+        
+        return encontrarMaiorFilhoEsquerda(no.getFilhoDireita());
+    }
+    
     @Override
     public int altura() {
         int alt = alturaRecursivo(this.raiz);
