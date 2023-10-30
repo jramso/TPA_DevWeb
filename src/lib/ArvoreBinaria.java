@@ -41,6 +41,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         this.proximoNo = encontrarMenorNo(this.raiz);
     }
 
+    /**
+     * Método para adicionar recursivamente um elemento a árvore
+     * @param no - sera utilizado para passar a partir de Nó que no serao inseridos elementos recursivamente (normalmente a raiz)
+     * @param novoValor - sera utilizado para passar o valor que sera inserido
+     * @return No<T> - retorno do tipo No
+     */
     protected No<T> adicionaRecursivo(No<T> no,No<T> novoValor){
         if(no==null){ 
             return novoValor;
@@ -64,6 +70,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return pesquisar(raiz,valor).getValor();
     }
 
+    /**
+     * Método que pesquisa e retorna um elemento da árvore se existir
+     * @param no - sera utilizado para passar a partir de qual Nó sera pesquisado o elemento (normalmente a partir da raiz)
+     * @param valor - valor a ser pesquisado nos nós
+     * @return No<T> - anteriormente de tipo T (valor dentro do nó) mas para questoes de reuso foi atualizado para o tipo No<T> se precisar do valor utilize um getValor()
+     */
     private No<T> pesquisar(No<T> no,T valor){
         if (no == null){
             return null;
@@ -92,6 +104,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return removerNo(raiz, valor);
     }
 
+    /**
+     * Método que escolhe a forma apropriada para remover o nó da arvore
+     * @param no - era utilizado para passar a partir de qual Nó sera pesquisado o elemento para remover (normalmente a partir da raiz)
+     * @param valor - o valor que será removido se existir
+     * @return T - tipo de valor dos Nós
+     */
     private T removerNo(No<T> no, T valor) {
        
 
@@ -162,6 +180,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return removido.getValor();
     }
    
+    /**
+     * Método que encontra o maior filho de uma árvore ou sub-arvore
+     * @param no - a partir de qual elemento é buscado o maior
+     * @return No<T> - tipo nó
+     */
     private No<T> encontrarMaiorFilhoEsquerda(No<T> no) {
         if (no.getFilhoDireita() == null) {
             return no; // Não há filho à direita, então este é o maior valor à esquerda
@@ -176,6 +199,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return alt;
     }
 
+    /**
+     * Método que retorna a altura da árvore de maneira Recursiva
+     * @param no - a partir de qual elemento é buscado a altura
+     * @return int - inteiro contador de níveis
+     */
     protected int alturaRecursivo(No<T> no) {
        
         if (no == null) 
@@ -196,6 +224,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return quantidadeNosRecursiva(this.raiz);
     }
 
+    /**
+     * Método que retorna a quantidade de nós da arvore ou subarvore de maneira recursiva
+     * @param no - a partir de qual elemento é contado a quantidade de nós
+     * @return int - quantidade de nos
+     */
     private int quantidadeNosRecursiva(No<T> no){
         
         if (no == null){
@@ -210,7 +243,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     public String caminharEmNivel() {
         return "["+caminhaEmNivel()+"]";
     }
-
+    /**
+     * Método que preenche uma fila que ordena os elementos por níveis e coloca a saída em uma String
+     * @return String
+     */
     private String caminhaEmNivel(){
         ArrayList<No<T>> fila = new ArrayList<No<T>>();
         String resultado = "";
@@ -234,10 +270,16 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return resultado;
     }
     
+    @Override
     public String caminharEmOrdem() {
         return "[" + caminharEmOrdem(this.raiz) + "]";
     }
 
+    /**
+     * Método que monta a String de encaminhamento em ordem
+     * @param raiz -  a partir de qual elemento e feito o caminho
+     * @return String
+     */
     private String caminharEmOrdem(No<T> raiz) {
         if (raiz == null) {
             return "";
@@ -279,7 +321,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     //metodos adicionais
 
-    // Método que encontra o menor nó a partir da raiz
+    /**
+     *  Método que encontra o menor nó da arvore ou subarvore a partir de um no
+     * @param no - no que serve de raiz
+     * @return No<T> - tipo No
+    */
     private No<T> encontrarMenorNo(No<T> no) {
         //o nó recebido deve ser a raiz ou sera o menor nó a partir daquele "galho"
         No<T> atual = no;
@@ -289,7 +335,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return atual;
     }
 
-    // metodo que encontra o próximo nó para "obterProximo"
+    /**
+     * Método que encontra o próximo nó para o método de obter próximo - encontrando o valor seguinte ao chamado anteriormente
+     * @param no - raiz
+     * @return No <T> - tipo nó
+     */
     private No<T> encontrarSucessor(No<T> no) {
         if (no.getFilhoDireita() != null) {
             // se tiver filho a direita o sucessor é o menor do lado desse filho
