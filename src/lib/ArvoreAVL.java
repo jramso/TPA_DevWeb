@@ -2,6 +2,16 @@ package lib;
 
 import java.util.Comparator;
 
+
+/**
+ *
+ * @author jramso
+ * @author fernandajaimara
+ * @author maressakaren
+ * @author MateusLannes
+ * @author Rafael-byte-tech
+ * 
+ */
 public class ArvoreAVL<T> extends ArvoreBinaria<T> {
 
     public ArvoreAVL(Comparator<T> comparator) {
