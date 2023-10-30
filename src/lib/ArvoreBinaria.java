@@ -72,11 +72,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         
         }else if (comparar<0){
             //busca a esquerda
-            paiNo = no;
+            this.paiNo = no;
            return pesquisar(no.getFilhoEsquerda(),valor);
         }else{
             //busca a direita
-            paiNo = no;
+            this.paiNo = no;
             return pesquisar(no.getFilhoDireita(),valor);
         }
     }
@@ -119,22 +119,35 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                     paiNo.setFilhoEsquerda(removido.getFilhoEsquerda());
                     removido.setFilhoEsquerda(null);
                 //tem filho so a direita
-                }else if(removido.getFilhoEsquerda()==null){
+                }
+                if(removido.getFilhoEsquerda()==null){
                     //no pai fica com filho
                     //criado pelo avo
                     paiNo.setFilhoDireita(removido.getFilhoDireita());
                     removido.setFilhoDireita(null);
-                }else{
+                }
+                if(removido.getFilhoEsquerda()!=null && removido.getFilhoDireita()!=null){
                     //tem os dois filhos
                     //pega o maior filho a esquerda dele
-                    No<T> maiorEsquerda = encontrarMaiorFilhoEsquerda(removido.getFilhoEsquerda());
+                    No<T> maiorNo = encontrarMaiorFilhoEsquerda(removido.getFilhoEsquerda());
+                    //troca o valor dos nós
+                    T valorNo = removido.getValor();
+                    removido.setValor(maiorNo.getValor());
+                    if (removido!=raiz){
+                        
+                        if (removido.getFilhoEsquerda()==maiorNo){
+                            removido.setFilhoEsquerda(null);
+                        }
+                        
+                    }else{
+                        raiz.setValor(maiorNo.getValor());
+                        maiorNo=null;
+                        
+                    }
 
-                    maiorEsquerda.setFilhoDireita(removido.getFilhoDireita());
-                    maiorEsquerda.setFilhoEsquerda(removido.getFilhoEsquerda());
-                    //procura o maior a esquerda de novo em removidos para remover o pai do maiorEsquerda
-                    pesquisar(removido, maiorEsquerda.getValor());
-                    //removido o ciclo
-                    paiNo.setFilhoDireita(null);
+
+                    return valorNo;
+
 
                 }
             }

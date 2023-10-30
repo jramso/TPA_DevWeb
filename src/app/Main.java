@@ -10,7 +10,7 @@ public class Main {
     public static void main (String args[]){
         String nome = "Magaghab";
         Aluno aluno = new Aluno(123, "Jud");
-        Aluno aluno2 = new Aluno(123,"Ped");
+        Aluno aluno2 = new Aluno(2000000005,"Ped");
         GeradorDeArvores gerador = new GeradorDeArvores();
         IArvoreBinaria<Aluno> arv;
 
@@ -21,7 +21,7 @@ public class Main {
         //System.out.println(comp.compare(aluno, aluno2));
         arv = new ArvoreBinaria(comp);
         gerador.geraArvorePerfeitamenteBalanceada(1,10,arv);
-
+        arv.remover(aluno2);
         
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         System.out.println("Altura: " + arv.altura());
