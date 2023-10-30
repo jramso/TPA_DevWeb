@@ -24,7 +24,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
     }
 
     protected No<T> adicionaRecursivo(No<T> no,No<T> novoValor){
-        raiz = super.adicionaRecursivo(no, novoValor);
+        raiz = super.adicionarRecursivo(no, novoValor);
           
         if (fatorDeBalanceamento(raiz) > 1) {
             if (fatorDeBalanceamento(raiz.getFilhoDireita()) > 0) {

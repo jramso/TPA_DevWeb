@@ -11,6 +11,7 @@ public class Main {
         String nome = "Magaghab";
         Aluno aluno = new Aluno(123, "Jud");
         Aluno aluno2 = new Aluno(2000000005,"Ped");
+        Aluno aluno1 = new Aluno(2000000001,"Ped");
         GeradorDeArvores gerador = new GeradorDeArvores();
         IArvoreBinaria<Aluno> arv;
 
