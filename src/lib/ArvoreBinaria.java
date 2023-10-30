@@ -19,16 +19,19 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     protected No<T> atual = null;
     private ArrayList<No<T>> pilhaNavegacao = null;
+    private No<T> proximoNo = null;
+
 
     public ArvoreBinaria(Comparator<T> comp) {
         this.comparador = comp;
+        
     }
 
     @Override
     public void adicionar(T novoValor) {
         No <T> novoNo = new No<>(novoValor);
         this.raiz = adicionaRecursivo(this.raiz, novoNo);
-
+        this.proximoNo = encontrarMenorNo(this.raiz);
     }
 
     protected No<T> adicionaRecursivo(No<T> no,No<T> novoValor){
@@ -158,9 +161,17 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
         return resultado;
     }
+
     @Override
-    public T obterProximo(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public T obterProximo() {
+        if (proximoNo == null) {
+            return null; // Árvore vazia ou todos os elementos já foram retornados
+        }
+
+        T valor = proximoNo.getValor(); //primeira vez pega a do menor no
+        proximoNo = encontrarSucessor(proximoNo); // Encontrar o próximo nó na ordem crescente // "avisa" o proximo
+        return valor;
     }
     
     @Override
@@ -176,6 +187,45 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+
+    //metodos adicionais
+
+    // Método que encontra o menor nó a partir da raiz
+    private No<T> encontrarMenorNo(No<T> no) {
+        //o nó recebido deve ser a raiz ou sera o menor nó a partir daquele "galho"
+        No<T> atual = no;
+        while (atual != null && atual.getFilhoEsquerda() != null) {
+            atual = atual.getFilhoEsquerda();
+        }
+        return atual;
+    }
+
+    // metodo que encontra o próximo nó para "obterProximo"
+    private No<T> encontrarSucessor(No<T> no) {
+        if (no.getFilhoDireita() != null) {
+            // se tiver filho a direita o sucessor é o menor do lado desse filho
+            return encontrarMenorNo(no.getFilhoDireita());
+        }
+    
+        No<T> sucessor = null;
+        // busca o sucessor a partir da raiz
+        while (raiz != null) {
+            int comp = comparador.compare(no.getValor(), raiz.getValor());
+            if (comp < 0) {
+                sucessor = raiz;
+                raiz = raiz.getFilhoEsquerda();
+            } else if (comp > 0) {
+                raiz = raiz.getFilhoDireita();
+            } else {
+                break; // O nó foi encontrado
+            }
+        }
+    
+        return sucessor;
+    }
+    
+
+
 
 } 
 
