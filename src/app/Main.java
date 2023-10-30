@@ -27,6 +27,7 @@ public class Main {
         System.out.println("Altura: " + arv.altura());
 
         System.out.println(arv.caminharEmOrdem());
+        System.out.println(arv.caminharEmNivel());
     }
     
 }

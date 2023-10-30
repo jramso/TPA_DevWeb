@@ -80,7 +80,13 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public T remover(T valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //procura se existe o valor
+        if (pesquisar(valor)!=null){
+            return valor;
+        }else{
+            return null;
+        }
+
     }
     @Override
     public int altura() {
@@ -120,22 +126,22 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public String caminharEmNivel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
+        return "["+caminhaEmNivel()+"]";
     }
 
-    public void caminhaEmNivel(){
+    private String caminhaEmNivel(){
         ArrayList<No<T>> fila = new ArrayList<No<T>>();
+        String resultado = "";
         if (this.raiz == null)
             System.out.println("Caminhamento por Nível - Árvore Vazia");
         else{
-            System.out.println("Caminhamento por Nível: ");
             No<T> atual;
             fila.add(this.raiz);
             while (fila.size() > 0 ){
                 
                 atual = fila.get(0);
+                resultado += atual.getValor() + "\n";
                 fila.remove(0);
-                System.out.println(atual.getValor() + " - " + alturaRecursivo(atual));
                 if (atual.getFilhoEsquerda() != null)
                     fila.add(atual.getFilhoEsquerda());
                 if (atual.getFilhoDireita() != null){
@@ -143,6 +149,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                 }                          
             }
         }
+        return resultado;
     }
     
     public String caminharEmOrdem() {
@@ -156,7 +163,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
         String resultado = "";
         resultado += caminharEmOrdem(raiz.getFilhoEsquerda());
-        resultado += raiz.getValor() + " ";
+        resultado += raiz.getValor() + "\n";
         resultado += caminharEmOrdem(raiz.getFilhoDireita());
 
         return resultado;
