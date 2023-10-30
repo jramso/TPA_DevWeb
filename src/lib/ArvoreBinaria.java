@@ -80,14 +80,25 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public T remover(T valor) {
-        //procura se existe o valor
-        if (pesquisar(valor)!=null){
-            return valor;
-        }else{
-            return null;
+        return removerNo(raiz, valor);
+    }
+
+    private T removerNo(No<T> no, T valor) {
+        No<T> paiNo;
+
+        while(no != null && comparador.compare(no.getValor(), valor) != 0){
+            paiNo = no;
+            if(comparador.compare(no.getValor(), valor) > 0){
+                no = no.getFilhoEsquerda();
+            }else{
+                no = no.getFilhoDireita();
+            }
         }
 
+        return valor;
     }
+   
+
     @Override
     public int altura() {
         int alt = alturaRecursivo(this.raiz);
