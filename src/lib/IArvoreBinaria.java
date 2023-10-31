@@ -5,30 +5,25 @@
  */
 package lib;
 
-import java.util.Comparator;
-
 /**
  *
  * @author victoriocarvalho
  * 
- * É um requisito do trabalho que sua classe ArvoreBinária implemente esta interface!
+ * É um requisito do trabalho que a sua classe ArvoreBinária implemente esta interface!
  * Com isso garantiremos que você implementou todos os métodos obrigatórios e que 
  * conseguirá rodar o programa de teste para redigir o relatório.
  * 
  * 
  * @param <T>
  */
-public interface IArvoreBinaria<T> {
-    
-    
-    
+public interface IArvoreBinaria<T>
+{
     /**
      * Método para adicionar um elemento à árvore.
      * @param novoValor - Elemento do Tipo T a ser armazenado na árvore.
      * 
      */
     public void adicionar(T novoValor);
-    
 
     /**
      * Método para pesquisar por um elemento na árvore e retorná-lo.
@@ -59,16 +54,15 @@ public interface IArvoreBinaria<T> {
     
     /**
      * Metódo que retona o resultado do caminhamento em nível na árvore.
-     * @return String contendo os toString dos valores armazenados nos nós, separados por " \n ". Os nós devem ser percorridos em nível. A String deve iniciar com "[" e finalizar com "]"
+     * @return ‘String’ contendo os toString dos valores armazenados nos nós, separados por " \n ". Os nós devem ser percorridos em nível. A ‘String’ deve iniciar com "[" e finalizar com "]"
      */
     public String caminharEmNivel();
     
     /**
      * Metódo que retona o resultado do caminhamento em ordem na árvore.
-     * @return String contendo os toString dos valores armazenados nos nós, separados por " \n ". Os nós devem ser percorridos em ordem. A String deve iniciar com "[" e finalizar com "]"
+     * @return ‘String’ contendo os toString dos valores armazenados nos nós, separados por" \não ". Os nós devem ser percorridos em ordem. A ‘String’ deve iniciar com "[" e finalizar com "]"
      */
     public String caminharEmOrdem();
-    
     
     /**
      * Metódo que permite iterar sobre os elementos da árvore os retornando em ordem crescente. 

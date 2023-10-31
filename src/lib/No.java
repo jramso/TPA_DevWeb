@@ -5,51 +5,58 @@
  */
 package lib;
 
-
-public class No<T> {
-
+public class No<T>
+{
     private T valor;
     private No<T> filhoDireita;
     private No<T> filhoEsquerda;
     private No<T> pai;
 
-    public No(T valor) {
+    public No(T valor)
+    {
         this.valor = valor;
         this.filhoDireita = null;
         this.filhoEsquerda = null;
         this.pai = null;
     }
 
-    public T getValor() {
+    public T getValor()
+    {
         return valor;
     }
 
-    public void setValor(T valor) {
+    public void setValor(T valor)
+    {
         this.valor = valor;
     }
 
-    public No<T> getFilhoDireita() {
+    public No<T> getFilhoDireita()
+    {
         return filhoDireita;
     }
 
-    public void setFilhoDireita(No<T> filhoDireita) {
+    public void setFilhoDireita(No<T> filhoDireita)
+    {
         this.filhoDireita = filhoDireita;
     }
 
-    public No<T> getFilhoEsquerda() {
+    public No<T> getFilhoEsquerda()
+    {
         return filhoEsquerda;
     }
 
-    public void setFilhoEsquerda(No<T> filhoEsquerda) {
+    public void setFilhoEsquerda(No<T> filhoEsquerda)
+    {
         this.filhoEsquerda = filhoEsquerda;
     }
 
-    public No<T> getPai() {
+    public No<T> getPai()
+    {
         return pai;
     }
 
-    public void setPai(No<T> pai) {
+    public void setPai(No<T> pai)
+    {
         this.pai = pai;
     }
 }
-
