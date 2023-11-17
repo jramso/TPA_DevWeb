@@ -10,14 +10,14 @@ public class No<T>
     private T valor;
     private No<T> filhoDireita;
     private No<T> filhoEsquerda;
-    private No<T> pai;
+    //private No<T> pai;
 
     public No(T valor)
     {
         this.valor = valor;
         this.filhoDireita = null;
         this.filhoEsquerda = null;
-        this.pai = null;
+        //this.pai = null;
     }
 
     public T getValor()
@@ -50,7 +50,7 @@ public class No<T>
         this.filhoEsquerda = filhoEsquerda;
     }
 
-    public No<T> getPai()
+    /*public No<T> getPai()
     {
         return pai;
     }
@@ -58,5 +58,5 @@ public class No<T>
     public void setPai(No<T> pai)
     {
         this.pai = pai;
-    }
+    }*/
 }

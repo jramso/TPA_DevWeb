@@ -18,12 +18,12 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>
         super(comparator);
     }
 
-    @Override
-    public void adicionar(T novoValor)
+    
+    /*public void adicionar(T novoValor)
     {
         super.adicionar(novoValor);
         balancear();
-    }
+    }*/
 
     @Override
     public T remover(T valor) {
@@ -31,12 +31,12 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>
 
         removido = super.remover(valor);
 
-        balancear();
+        //balancear();
 
         return removido;
     }
 
-    private void balancear()
+    /*private void balancear()
     {
         if (fatorDeBalanceamento(this.raiz) > 1)
         {
@@ -60,7 +60,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>
                 this.raiz = rotacaoEsquerdaDireita(this.raiz);
             }
         }
-    }
+    }*/
 
     private No<T> rotacaoEsquerda(No<T> no) {
         No<T> noAuxiliar = no.getFilhoDireita();
@@ -103,33 +103,37 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>
         }
         return current;
     }
+    @Override
+    public void adicionar(T valor){
+        super.adicionar(valor);
+    }
 
-    /*private No<T> adicionaRecursivo(No<T> no,No<T> novoValor)
-    {
-        this.raiz = super.adicionarRecursivo(no, novoValor);
+    @Override
+    protected No<T> adicionarRecursivo(No<T> no,No<T> novoValor){
+        no = super.adicionarRecursivo(no, novoValor);
 
-        if (fatorDeBalanceamento(this.raiz) > 1)
+        if (fatorDeBalanceamento(no) > 1)
         {
-            if (fatorDeBalanceamento(this.raiz.getFilhoDireita()) > 0)
+            if (fatorDeBalanceamento(no.getFilhoDireita()) > 0)
             {
-                this.raiz = rotacaoEsquerda(this.raiz);
+                no = rotacaoEsquerda(no);
             }
             else
             {
-                this.raiz = rotacaoDireitaEsquerda(this.raiz);
+                no = rotacaoDireitaEsquerda(no);
             }
         }
-        else if (fatorDeBalanceamento(this.raiz) < -1)
+        else if (fatorDeBalanceamento(no) < -1)
         {
-            if (fatorDeBalanceamento(this.raiz.getFilhoEsquerda()) < 0)
+            if (fatorDeBalanceamento(no.getFilhoEsquerda()) < 0)
             {
-                this.raiz = rotacaoDireita(this.raiz);
+                no = rotacaoDireita(no);
             } else
             {
-                this.raiz = rotacaoEsquerdaDireita(this.raiz);
+                no = rotacaoEsquerdaDireita(no);
             }
         }
 
-        return raiz;
-    }*/
+        return no;
+    }
 }

@@ -32,10 +32,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
         this.comparador = comp;
         this.atual = null;
         this.proximoNo = null;
-        this.pai = null;
+        //this.pai = null;
     }
 
-    @Override
+    /*@Override
     public void adicionar(T novoValor)
     {
         No<T> novoNo = new No<>(novoValor);
@@ -70,9 +70,20 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
         }
 
         this.proximoNo = encontrarMenorNo(this.raiz);
+    }*/
+    @Override
+    public void  adicionar (T valor){
+        No<T> novoNo  = new No<>(valor);
+        if(this.raiz == null){
+            this.raiz = novoNo;
+        }
+        else{
+            this.raiz = adicionarRecursivo(this.raiz, novoNo);
+        }
+        
     }
 
-    /*protected No<T> adicionarRecursivo(No<T> no, No<T> novoValor)
+    protected No<T> adicionarRecursivo(No<T> no, No<T> novoValor)
     {
         if (no == null)
         {
@@ -89,7 +100,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
         }
 
         return no;
-    }*/
+    }
 
     @Override
     public T pesquisar(T valor)
@@ -119,18 +130,19 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
         }else if (comparar<0){
             //busca a esquerda
             this.pai = no;
-           return pesquisar(no.getFilhoEsquerda(),valor);
+           return pesquisar(no.getFilhoDireita(),valor); // MARESSA MUDOU AQUI, SE TIVER ERRADO COLOQUE getFilhoEsquerda
         }else{
             //busca a direita
             this.pai = no;
-            return pesquisar(no.getFilhoDireita(),valor);
+            return pesquisar(no.getFilhoEsquerda(),valor); //MARESSA MUDOU AQUI, SE TIVER ERRADO COLOQUE getFilhoDireita
         }
     }
 
     @Override
     public T remover(T valor)
     {
-        return remover(raiz, valor);
+        //return remover(raiz, valor);
+        return null;
     }
 
     /**
@@ -139,7 +151,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
      * @param valor - o valor que será removido se existir
      * @return T - tipo de valor dos Nós
      */
-    private T remover(No<T> no, T valor)
+    /*private T remover(No<T> no, T valor)
     {
 
         // Pesquisa o nó a ser removido
@@ -200,7 +212,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>
             // Retorna o valor do nó removido
             return removido.getValor();
         }
-    }
+    }*/
 
     /**
      * Método que encontra o maior filho de uma árvore ou subarvore

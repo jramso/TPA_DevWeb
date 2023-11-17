@@ -42,11 +42,11 @@ public class AppRelatorioAVL {
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         
         arv = new ArvoreAVL(comparador);
-        gerador.geraArvoreDegenerada(10, arv);
+        gerador.geraArvoreDegenerada(10000, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         arv = new ArvoreBinaria(comparador);
-        gerador.geraArvoreDegenerada(10, arv);
+        gerador.geraArvoreDegenerada(10000, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
 
