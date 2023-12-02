@@ -86,10 +86,10 @@ public class Grafo {
             visitados.add(false);
         }
 
-        // Chamamos o método recursivo para visitar a raiz
+        // Chama o método recursivo para visitar a raiz
         buscaEmProfundidadeRecursivo(vertices.get(0));
 
-        // Verificamos se algum vértice foi visitado mais de uma vez
+        // Verifica se algum vértice foi visitado mais de uma vez
         for (int i = 0; i < visitados.size(); i++) {
             if (visitados.get(i)) {
                 return true;
@@ -101,10 +101,10 @@ public class Grafo {
 
     private void buscaEmProfundidadeRecursivo(Vertice v) {
 
-        // Marcamos o vértice como visitado
+        // Marca o vértice como visitado
         visitados.set(vertices.indexOf(v), true);
 
-        // Visitamos todos os vizinhos do vértice
+        // Visita todos os vizinhos do vértice
         for (Aresta e : v.getAdj()) {
             if (!visitados.get(vertices.indexOf(e.getDestino()))) {
                 buscaEmProfundidadeRecursivo(e.getDestino());
