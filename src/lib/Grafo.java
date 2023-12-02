@@ -11,6 +11,7 @@ public class Grafo {
 
     private List<Vertice> vertices;
     private List<Aresta> arestas;
+    private List<Boolean> visitados;
 
     /**
      * Constructor - Crie um grafo com 2 listas uma de vertices outra de arestas
@@ -20,6 +21,7 @@ public class Grafo {
     public Grafo() {
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
+        visitados = new ArrayList();
     }
 
     /**
@@ -76,6 +78,38 @@ public class Grafo {
             }
         }
         return false;
+    }
+
+    public boolean temCiclo(){
+
+        for (int i = 0; i < vertices.size(); i++) {
+            visitados.add(false);
+        }
+
+        // Chamamos o método recursivo para visitar a raiz
+        buscaEmProfundidadeRecursivo(vertices.get(0));
+
+        // Verificamos se algum vértice foi visitado mais de uma vez
+        for (int i = 0; i < visitados.size(); i++) {
+            if (visitados.get(i)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void buscaEmProfundidadeRecursivo(Vertice v) {
+
+        // Marcamos o vértice como visitado
+        visitados.set(vertices.indexOf(v), true);
+
+        // Visitamos todos os vizinhos do vértice
+        for (Aresta e : v.getAdj()) {
+            if (!visitados.get(vertices.indexOf(e.getDestino()))) {
+                buscaEmProfundidadeRecursivo(e.getDestino());
+            }
+        }
     }
 
     /**
