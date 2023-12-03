@@ -48,9 +48,9 @@ public class Main {
 
         g.adicionaAresta(v1, v2);
         g.adicionaAresta(v2, v3);
-        g.adicionaAresta(v3, v2);
+        g.adicionaAresta(v3, v4);
 
-        System.out.println(g.temCiclo(v1)); // true
+        System.out.println(g.temCiclo()); // true
 
 
     }

@@ -83,6 +83,62 @@ public class Grafo {
     }
 
 
+    /**
+     * Verifica se o grafo possui ciclos.
+     *
+     * @return true se o grafo tiver ciclos, false caso contrário.
+     */
+    public boolean temCiclo() {
+        // Conjunto para rastrear os vértices visitados durante a busca em profundidade.
+        Set<Vertice> visitados = new HashSet<>();
+
+        // Conjunto para rastrear os vértices em processo de visita durante a busca em profundidade.
+        Set<Vertice> emProcesso = new HashSet<>();
+
+        // Verifica ciclos em cada vértice não visitado.
+        for (Vertice vertice : vertices) {
+            if (!visitados.contains(vertice)) {
+                if (temCicloDFS(vertice, visitados, emProcesso)) {
+                    return true; // Se encontrar um ciclo em qualquer ponto, retorna true.
+                }
+            }
+        }
+
+        return false; // Se nenhum ciclo for encontrado.
+    }
+
+    /**
+     * Método auxiliar para verificar ciclos usando a busca em profundidade (DFS).
+     *
+     * @param vertice     O vértice atual a ser verificado.
+     * @param visitados   Conjunto de vértices visitados.
+     * @param emProcesso  Conjunto de vértices em processo de visita.
+     * @return true se um ciclo for encontrado, false caso contrário.
+     */
+    private boolean temCicloDFS(Vertice vertice, Set<Vertice> visitados, Set<Vertice> emProcesso) {
+        visitados.add(vertice);
+        emProcesso.add(vertice);
+
+        // Verifica cada vértice adjacente.
+        for (Aresta aresta : vertice.getAdj()) {
+            Vertice destino = aresta.getDestino();
+
+            // Se o vértice adjacente já estiver em processo de visita, há um ciclo.
+            if (emProcesso.contains(destino)) {
+                return true;
+            }
+
+            // Se o vértice adjacente não estiver visitado, continua a busca em profundidade.
+            if (!visitados.contains(destino)) {
+                if (temCicloDFS(destino, visitados, emProcesso)) {
+                    return true; // Se um ciclo for encontrado em qualquer ponto, retorna true.
+                }
+            }
+        }
+
+        emProcesso.remove(vertice); // Remove o vértice do conjunto em processo após a visita completa.
+        return false;
+    }
 
 
     /**
