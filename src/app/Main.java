@@ -4,8 +4,10 @@ import java.util.Comparator;
 
 import lib.ArvoreAVL;
 import lib.ArvoreBinaria;
+import lib.Grafo;
 import lib.IArvoreBinaria;
 import lib.No;
+import lib.Vertice;
 
 public class Main {
 
@@ -31,11 +33,25 @@ public class Main {
 
         System.out.println(arv.caminharEmOrdem());
         System.out.println(arv.caminharEmNivel());*/
-        ArvoreAVL <Aluno> arvore = new ArvoreAVL<>(comp);
-        Aluno aluno = new Aluno(123, "Jud");
-        Aluno aluno2 = new Aluno(2000000005,"Ped");
-        Aluno aluno1 = new Aluno(2000000001,"Ped");
+        // ArvoreAVL <Aluno> arvore = new ArvoreAVL<>(comp);
+        // Aluno aluno = new Aluno(123, "Jud");
+        // Aluno aluno2 = new Aluno(2000000005,"Ped");
+        // Aluno aluno1 = new Aluno(2000000001,"Ped");
        
+        Grafo g = new Grafo();
+
+        Vertice v1 = g.adicionaVertice("V1");
+        Vertice v2 = g.adicionaVertice("V2");
+        Vertice v3 = g.adicionaVertice("V3");
+        Vertice v4 = g.adicionaVertice("V4");
+
+
+        g.adicionaAresta(v1, v2);
+        g.adicionaAresta(v2, v3);
+        g.adicionaAresta(v3, v2);
+
+        System.out.println(g.temCiclo(v1)); // true
+
 
     }
     

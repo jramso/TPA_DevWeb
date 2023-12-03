@@ -2,7 +2,9 @@
 package lib;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author jramso
@@ -11,7 +13,7 @@ public class Grafo {
 
     private List<Vertice> vertices;
     private List<Aresta> arestas;
-    private List<Boolean> visitados;
+    private List<Integer> visitados;
 
     /**
      * Constructor - Crie um grafo com 2 listas uma de vertices outra de arestas
@@ -21,7 +23,7 @@ public class Grafo {
     public Grafo() {
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
-        visitados = new ArrayList();
+        visitados = new ArrayList<>();
     }
 
     /**
@@ -80,37 +82,8 @@ public class Grafo {
         return false;
     }
 
-    public boolean temCiclo(){
 
-        for (int i = 0; i < vertices.size(); i++) {
-            visitados.add(false);
-        }
 
-        // Chama o método recursivo para visitar a raiz
-        buscaEmProfundidadeRecursivo(vertices.get(0));
-
-        // Verifica se algum vértice foi visitado mais de uma vez
-        for (int i = 0; i < visitados.size(); i++) {
-            if (visitados.get(i)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void buscaEmProfundidadeRecursivo(Vertice v) {
-
-        // Marca o vértice como visitado
-        visitados.set(vertices.indexOf(v), true);
-
-        // Visita todos os vizinhos do vértice
-        for (Aresta e : v.getAdj()) {
-            if (!visitados.get(vertices.indexOf(e.getDestino()))) {
-                buscaEmProfundidadeRecursivo(e.getDestino());
-            }
-        }
-    }
 
     /**
      * Este metodo retorna o peso de uma aresta entre origem e Destino se existir uma aresta
