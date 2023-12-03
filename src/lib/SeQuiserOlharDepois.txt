@@ -1,0 +1,164 @@
+import java.util.*;
+
+// Classe de Vértice
+class Vertice {
+    private String nome;
+    private Object valor;
+    private List<Aresta> arestas;
+
+    // Construtor para criar um novo vértice com nome e valor
+    public Vertice(String nome, Object valor) {
+        this.nome = nome;
+        this.valor = valor;
+        this.arestas = new ArrayList<>();
+    }
+
+    // Obtém o nome do vértice
+    public String getNome() {
+        return nome;
+    }
+
+    // Obtém o valor associado ao vértice
+    public Object getValor() {
+        return valor;
+    }
+
+    // Obtém a lista de arestas do vértice
+    public List<Aresta> getArestas() {
+        return arestas;
+    }
+
+    // Adiciona uma aresta direcionada ao vértice
+    public void adicionarAresta(Vertice destino) {
+        Aresta aresta = new Aresta(this, destino);
+        arestas.add(aresta);
+    }
+}
+
+// Classe de Aresta
+class Aresta {
+    private Vertice origem;
+    private Vertice destino;
+
+    // Construtor para criar uma nova aresta entre origem e destino
+    public Aresta(Vertice origem, Vertice destino) {
+        this.origem = origem;
+        this.destino = destino;
+    }
+
+    // Obtém o vértice de origem da aresta
+    public Vertice getOrigem() {
+        return origem;
+    }
+
+    // Obtém o vértice de destino da aresta
+    public Vertice getDestino() {
+        return destino;
+    }
+}
+
+// Classe de Grafo
+class Grafo {
+    private List<Vertice> vertices;
+    private boolean[] visitados;
+
+    // Construtor para criar um novo grafo
+    public Grafo() {
+        this.vertices = new ArrayList<>();
+    }
+
+    // Adiciona um novo vértice ao grafo com um nome e um valor associado
+    public void adicionarVertice(String nome, Object valor) {
+        Vertice novoVertice = new Vertice(nome, valor);
+        vertices.add(novoVertice);
+    }
+
+    // Adiciona uma aresta direcionada entre dois vértices no grafo
+    public void adicionarAresta(String verticeOrigem, String verticeDestino) {
+        Vertice origem = encontrarVertice(verticeOrigem);
+        Vertice destino = encontrarVertice(verticeDestino);
+
+        // Verifica se os vértices de origem e destino existem
+        if (origem != null && destino != null) {
+            origem.adicionarAresta(destino);
+        }
+    }
+
+    // Verifica se o grafo possui ciclos utilizando DFS
+    public boolean possuiCiclo() {
+        int numVertices = vertices.size();
+        visitados = new boolean[numVertices];
+
+        for (int i = 0; i < numVertices; i++) {
+            if (!visitados[i] && possuiCicloRecursivo(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Função auxiliar recursiva para verificar ciclos
+    private boolean possuiCicloRecursivo(int indiceVertice) {
+        if (visitados[indiceVertice]) {
+            return true;
+        }
+
+        visitados[indiceVertice] = true;
+
+        List<Aresta> arestas = vertices.get(indiceVertice).getArestas();
+        for (Aresta aresta : arestas) {
+            Vertice vizinho = aresta.getDestino();
+            int indiceVizinho = vertices.indexOf(vizinho);
+
+            if (possuiCicloRecursivo(indiceVizinho)) {
+                return true;
+            }
+        }
+
+        visitados[indiceVertice] = false;
+        return false;
+    }
+
+    // Realiza a ordenação topológica do grafo utilizando DFS
+    public List<String> ordenacaoTopologica() {
+        List<String> resultado = new ArrayList<>();
+        int numVertices = vertices.size();
+        visitados = new boolean[numVertices];
+
+        for (int i = 0; i < numVertices; i++) {
+            if (!visitados[i]) {
+                ordenacaoTopologicaRecursivo(i, resultado);
+            }
+        }
+
+        Collections.reverse(resultado);
+        return resultado;
+    }
+
+    // Função auxiliar recursiva para ordenação topológica
+    private void ordenacaoTopologicaRecursivo(int indiceVertice, List<String> resultado) {
+        visitados[indiceVertice] = true;
+
+        List<Aresta> arestas = vertices.get(indiceVertice).getArestas();
+        for (Aresta aresta : arestas) {
+            Vertice vizinho = aresta.getDestino();
+            int indiceVizinho = vertices.indexOf(vizinho);
+
+            if (!visitados[indiceVizinho]) {
+                ordenacaoTopologicaRecursivo(indiceVizinho, resultado);
+            }
+        }
+
+        resultado.add(vertices.get(indiceVertice).getNome());
+    }
+
+    // Encontra um vértice no grafo pelo nome
+    private Vertice encontrarVertice(String nome) {
+        for (Vertice vertice : vertices) {
+            if (vertice.getNome().equals(nome)) {
+                return vertice;
+            }
+        }
+        return null;
+    }
+}
