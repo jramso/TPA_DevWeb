@@ -48,7 +48,7 @@ public class Grafo {
     public Aresta adicionaAresta(Vertice origem, Vertice destino, int peso) {
         Aresta e = new Aresta(origem, destino, peso);
         origem.addAdj(e);
-        destino.addAdj(e);
+        //destino.addAdj(e);
         arestas.add(e);
         return e;
     }
@@ -62,7 +62,7 @@ public class Grafo {
     public Aresta adicionaAresta(Vertice origem, Vertice destino) {
         Aresta e = new Aresta(origem, destino);
         origem.addAdj(e);
-        destino.addAdj(e);
+        //destino.addAdj(e);
         arestas.add(e);
         return e;
     }    
@@ -81,7 +81,6 @@ public class Grafo {
         }
         return false;
     }
-
 
     /**
      * Verifica se o grafo possui ciclos.
@@ -118,7 +117,7 @@ public class Grafo {
     private boolean temCicloDFS(Vertice vertice, Set<Vertice> visitados, Set<Vertice> emProcesso) {
         visitados.add(vertice);
         emProcesso.add(vertice);
-
+        
         // Verifica cada vértice adjacente.
         for (Aresta aresta : vertice.getAdj()) {
             Vertice destino = aresta.getDestino();

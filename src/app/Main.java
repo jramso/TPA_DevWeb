@@ -50,6 +50,8 @@ public class Main {
         g.adicionaAresta(v2, v3);
         g.adicionaAresta(v3, v4);
 
+
+
         System.out.println(g.temCiclo()); // true
 
 
