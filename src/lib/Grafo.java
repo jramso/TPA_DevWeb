@@ -14,7 +14,6 @@ public class Grafo<G> {
 
     private List<Vertice<G>> vertices;
     private List<Aresta<G>> arestas;
-    private List<Integer> visitados;
 
     /**
      * Constructor - Crie um grafo com 2 listas uma de vertices outra de arestas
@@ -24,7 +23,6 @@ public class Grafo<G> {
     public Grafo() {
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
-        visitados = new ArrayList<>();
     }
 
     /**

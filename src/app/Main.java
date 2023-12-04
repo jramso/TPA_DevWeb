@@ -67,10 +67,6 @@ public class Main {
         System.out.println("Grafo 1:");
         System.out.println(g);
 
-        System.out.println("Grafo 2:");
-        System.out.println(g2);
-
-
         // Verificar se o grafo tem ciclos
         System.out.println("Grafo 1: Tem ciclo? " + g.temCiclo());
 
@@ -78,6 +74,20 @@ public class Main {
         List<Vertice<String>> ordemTopologica = g.ordenacaoTopologica();
         System.out.println("Grafo 1: Ordenação Topológica:");
         System.out.println(ordemTopologica);
+
+        System.out.println("\n \n");
+
+        System.out.println("Grafo 2:");
+        System.out.println(g2);
+
+        // Verificar se o grafo tem ciclos
+        System.out.println("Grafo 2: Tem ciclo? " + g2.temCiclo());
+
+        // Realizar ordenação topológica
+        List<Vertice<Integer>> ordemTopologica2 = g2.ordenacaoTopologica();
+        System.out.println("Grafo 1: Ordenação Topológica:");
+        System.out.println(ordemTopologica2);
+
 
     }
     
