@@ -41,10 +41,10 @@ public class Main {
        
         Grafo g = new Grafo();
 
-        Vertice v1 = g.adicionaVertice("V1");
-        Vertice v2 = g.adicionaVertice("V2");
-        Vertice v3 = g.adicionaVertice("V3");
-        Vertice v4 = g.adicionaVertice("V4");
+        Vertice<String> v1 = g.adicionaVertice("V1");
+        Vertice<String> v2 = g.adicionaVertice("V2");
+        Vertice<String> v3 = g.adicionaVertice("V3");
+        Vertice<Integer> v4 = g.adicionaVertice(4);
 
 
         g.adicionaAresta(v1, v3);

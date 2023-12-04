@@ -3,34 +3,34 @@ package lib;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertice {
+public class Vertice <G> {
 
-    private String nome;
-    private List<Aresta> adj;
+    private G nome;
+    private List<Aresta<G>> adj;
 
-    public Vertice(String nome) {
+    public Vertice(G nome) {
         this.nome = nome;
         adj = new ArrayList<>();
     }
 
-    public String getNome() {
+    public G getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(G nome) {
         this.nome = nome;
     }
 
-    public List<Aresta> getAdj() {
+    public List<Aresta<G>> getAdj() {
         return adj;
     }
 
-    public void addAdj(Aresta aresta) {
+    public void addAdj(Aresta<G> aresta) {
         adj.add(aresta);
     }
 
     @Override
     public String toString() {
-        return nome;
+        return String.valueOf(nome);
     }
 }

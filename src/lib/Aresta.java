@@ -1,36 +1,36 @@
 package lib;
 
-public class Aresta {
+public class Aresta<G> {
 
-    private Vertice origem;
-    private Vertice destino;
+    private Vertice<G> origem;
+    private Vertice<G> destino;
     private int peso;
 
-    public Aresta(Vertice origem, Vertice destino, int peso) {
+    public Aresta(Vertice<G> origem, Vertice<G> destino, int peso) {
         this.origem = origem;
         this.destino = destino;
         this.peso = peso;
     }
 
-    public Aresta(Vertice origem, Vertice destino) {
+    public Aresta(Vertice<G> origem, Vertice<G> destino) {
         this.origem = origem;
         this.destino = destino;
         this.peso = 1;
     }
 
-    public Vertice getOrigem() {
+    public Vertice<G> getOrigem() {
         return origem;
     }
 
-    public void setOrigem(Vertice origem) {
+    public void setOrigem(Vertice<G> origem) {
         this.origem = origem;
     }
 
-    public Vertice getDestino() {
+    public Vertice<G> getDestino() {
         return destino;
     }
 
-    public void setDestino(Vertice destino) {
+    public void setDestino(Vertice<G> destino) {
         this.destino = destino;
     }
 

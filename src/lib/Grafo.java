@@ -10,10 +10,10 @@ import java.util.Stack;
 /**
  * @author jramso
  */
-public class Grafo {
+public class Grafo<G> {
 
-    private List<Vertice> vertices;
-    private List<Aresta> arestas;
+    private List<Vertice<G>> vertices;
+    private List<Aresta<G>> arestas;
     private List<Integer> visitados;
 
     /**
@@ -32,8 +32,8 @@ public class Grafo {
      * @param nome - nome do vertice (ex: V1, V2, A, B, C, "1", "2","3")
      * @return v - retorna o vértice adicionado
      */
-    public Vertice adicionaVertice(String nome) {
-        Vertice v = new Vertice(nome);
+    public Vertice<G> adicionaVertice(G valor) {
+        Vertice<G> v = new Vertice<>(valor);
         vertices.add(v);
         return v;
     }
@@ -46,8 +46,8 @@ public class Grafo {
      * @param peso - custo da origem até o destino
      * @return e - retorna uma aresta
      */
-    public Aresta adicionaAresta(Vertice origem, Vertice destino, int peso) {
-        Aresta e = new Aresta(origem, destino, peso);
+    public Aresta<G> adicionaAresta(Vertice<G> origem, Vertice<G> destino, int peso) {
+        Aresta<G> e = new Aresta<>(origem, destino, peso);
         origem.addAdj(e);
         //destino.addAdj(e);
         arestas.add(e);
@@ -60,8 +60,8 @@ public class Grafo {
      * @param destino - ponto de destino da aresta
      * @return e - retorna uma aresta
      */
-    public Aresta adicionaAresta(Vertice origem, Vertice destino) {
-        Aresta e = new Aresta(origem, destino);
+    public Aresta<G> adicionaAresta(Vertice<G> origem, Vertice<G> destino) {
+        Aresta<G> e = new Aresta<>(origem, destino);
         origem.addAdj(e);
         //destino.addAdj(e);
         arestas.add(e);
@@ -74,8 +74,8 @@ public class Grafo {
      * @param destino - ponto de destino da possivel aresta
      * @return boolean
      */
-    public boolean temAresta(Vertice origem, Vertice destino) {
-        for (Aresta e : origem.getAdj()) {
+    public boolean temAresta(Vertice<G> origem, Vertice<G> destino) {
+        for (Aresta<G> e : origem.getAdj()) {
             if (e.getDestino() == destino) {
                 return true;
             }
@@ -90,13 +90,13 @@ public class Grafo {
      */
     public boolean temCiclo() {
         // Conjunto para rastrear os vértices visitados durante a busca em profundidade.
-        Set<Vertice> visitados = new HashSet<>();
+        Set<Vertice<G>> visitados = new HashSet<>();
 
         // Conjunto para rastrear os vértices em processo de visita durante a busca em profundidade.
-        Set<Vertice> emProcesso = new HashSet<>();
+        Set<Vertice<G>> emProcesso = new HashSet<>();
 
         // Verifica ciclos em cada vértice não visitado.
-        for (Vertice vertice : vertices) {
+        for (Vertice<G> vertice : vertices) {
             if (!visitados.contains(vertice)) {
                 if (temCicloDFS(vertice, visitados, emProcesso)) {
                     return true; // Se encontrar um ciclo em qualquer ponto, retorna true.
@@ -115,13 +115,13 @@ public class Grafo {
      * @param emProcesso  Conjunto de vértices em processo de visita.
      * @return true se um ciclo for encontrado, false caso contrário.
      */
-    private boolean temCicloDFS(Vertice vertice, Set<Vertice> visitados, Set<Vertice> emProcesso) {
+    private boolean temCicloDFS(Vertice<G> vertice, Set<Vertice<G>> visitados, Set<Vertice<G>> emProcesso) {
         visitados.add(vertice);
         emProcesso.add(vertice);
         
         // Verifica cada vértice adjacente.
-        for (Aresta aresta : vertice.getAdj()) {
-            Vertice destino = aresta.getDestino();
+        for (Aresta<G> aresta : vertice.getAdj()) {
+            Vertice<G> destino = aresta.getDestino();
 
             // Se o vértice adjacente já estiver em processo de visita, há um ciclo.
             if (emProcesso.contains(destino)) {
@@ -141,22 +141,22 @@ public class Grafo {
     }
 
 
-    public List<Vertice> ordenacaoTopologica() {
+    public List<Vertice<G>> ordenacaoTopologica() {
         // Conjunto para rastrear os vértices visitados durante a busca em profundidade.
-        Set<Vertice> visitados = new HashSet<>();
+        Set<Vertice<G>> visitados = new HashSet<>();
 
         // Pilha para armazenar os vértices na ordem topológica.
-        Stack<Vertice> pilha = new Stack<>();
+        Stack<Vertice<G>> pilha = new Stack<>();
 
         // Realiza a ordenação topológica para cada vértice não visitado.
-        for (Vertice vertice : vertices) {
+        for (Vertice<G> vertice : vertices) {
             if (!visitados.contains(vertice)) {
                 ordenacaoTopologicaDFS(vertice, visitados, pilha);
             }
         }
 
         // Converte a pilha em uma lista para obter a ordem topológica.
-        List<Vertice> ordemTopologica = new ArrayList<>();
+        List<Vertice<G>> ordemTopologica = new ArrayList<>();
         while (!pilha.isEmpty()) {
             ordemTopologica.add(pilha.pop());
         }
@@ -171,12 +171,12 @@ public class Grafo {
      * @param visitados Conjunto de vértices visitados.
      * @param pilha     Pilha para armazenar os vértices na ordem topológica.
      */
-    private void ordenacaoTopologicaDFS(Vertice vertice, Set<Vertice> visitados, Stack<Vertice> pilha) {
+    private void ordenacaoTopologicaDFS(Vertice<G> vertice, Set<Vertice<G>> visitados, Stack<Vertice<G>> pilha) {
         visitados.add(vertice);
 
         // Visita cada vértice adjacente.
-        for (Aresta aresta : vertice.getAdj()) {
-            Vertice destino = aresta.getDestino();
+        for (Aresta<G> aresta : vertice.getAdj()) {
+            Vertice<G> destino = aresta.getDestino();
 
             // Se o vértice adjacente não estiver visitado, continua a busca em profundidade.
             if (!visitados.contains(destino)) {
@@ -195,8 +195,8 @@ public class Grafo {
      * @param destino - ponto de destino da possivel aresta
      * @return peso da aresta
      */
-    public int getPeso(Vertice origem, Vertice destino) {
-        for (Aresta e : origem.getAdj()) {
+    public int getPeso(Vertice<G> origem, Vertice<G> destino) {
+        for (Aresta<G> e : origem.getAdj()) {
             if (e.getDestino() == destino) {
                 return e.getPeso();
             }
@@ -206,9 +206,9 @@ public class Grafo {
 
     public String toString() {
         String r = "";
-        for (Vertice u : vertices) {
+        for (Vertice<G> u : vertices) {
             r += u.toString() + "\n";
-            for (Aresta e : u.getAdj()) {
+            for (Aresta<G> e : u.getAdj()) {
                 r += "  -> " + e.getDestino() + "(" + e.getPeso() + ")\n";
             }
         }
