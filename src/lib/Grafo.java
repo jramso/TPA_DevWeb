@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * @author jramso
@@ -140,6 +141,52 @@ public class Grafo {
     }
 
 
+    public List<Vertice> ordenacaoTopologica() {
+        // Conjunto para rastrear os vértices visitados durante a busca em profundidade.
+        Set<Vertice> visitados = new HashSet<>();
+
+        // Pilha para armazenar os vértices na ordem topológica.
+        Stack<Vertice> pilha = new Stack<>();
+
+        // Realiza a ordenação topológica para cada vértice não visitado.
+        for (Vertice vertice : vertices) {
+            if (!visitados.contains(vertice)) {
+                ordenacaoTopologicaDFS(vertice, visitados, pilha);
+            }
+        }
+
+        // Converte a pilha em uma lista para obter a ordem topológica.
+        List<Vertice> ordemTopologica = new ArrayList<>();
+        while (!pilha.isEmpty()) {
+            ordemTopologica.add(pilha.pop());
+        }
+
+        return ordemTopologica;
+    }
+
+    /**
+     * Método auxiliar para realizar a ordenação topológica usando a busca em profundidade (DFS).
+     *
+     * @param vertice   O vértice atual a ser verificado.
+     * @param visitados Conjunto de vértices visitados.
+     * @param pilha     Pilha para armazenar os vértices na ordem topológica.
+     */
+    private void ordenacaoTopologicaDFS(Vertice vertice, Set<Vertice> visitados, Stack<Vertice> pilha) {
+        visitados.add(vertice);
+
+        // Visita cada vértice adjacente.
+        for (Aresta aresta : vertice.getAdj()) {
+            Vertice destino = aresta.getDestino();
+
+            // Se o vértice adjacente não estiver visitado, continua a busca em profundidade.
+            if (!visitados.contains(destino)) {
+                ordenacaoTopologicaDFS(destino, visitados, pilha);
+            }
+        }
+
+        // Adiciona o vértice à pilha após visitar todos os vértices adjacentes.
+        pilha.push(vertice);
+    }    
 
 
     /**

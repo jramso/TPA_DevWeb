@@ -1,6 +1,7 @@
 package app;
 
 import java.util.Comparator;
+import java.util.List;
 
 import lib.ArvoreAVL;
 import lib.ArvoreBinaria;
@@ -46,11 +47,13 @@ public class Main {
         Vertice v4 = g.adicionaVertice("V4");
 
 
-        g.adicionaAresta(v1, v2);
-        g.adicionaAresta(v2, v3);
-        g.adicionaAresta(v3, v4);
+        g.adicionaAresta(v1, v3);
+        g.adicionaAresta(v3, v2);
+        g.adicionaAresta(v2, v4);
 
 
+        List<Vertice> ordemTopologica = g.ordenacaoTopologica();
+        System.out.println("Ordem Topológica: " + ordemTopologica);
 
         System.out.println(g.temCiclo()); // true
 
