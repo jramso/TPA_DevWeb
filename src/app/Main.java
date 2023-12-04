@@ -39,24 +39,29 @@ public class Main {
         // Aluno aluno2 = new Aluno(2000000005,"Ped");
         // Aluno aluno1 = new Aluno(2000000001,"Ped");
        
-        Grafo g = new Grafo();
+        Grafo<String> g = new Grafo<>();
 
         Vertice<String> v1 = g.adicionaVertice("V1");
         Vertice<String> v2 = g.adicionaVertice("V2");
         Vertice<String> v3 = g.adicionaVertice("V3");
-        Vertice<Integer> v4 = g.adicionaVertice(4);
+        Vertice<String> v4 = g.adicionaVertice("V4");
 
+        // Adicionar arestas
+        g.adicionaAresta(v1, v2);
+        g.adicionaAresta(v2, v3);
+        g.adicionaAresta(v3, v1);
 
-        g.adicionaAresta(v1, v3);
-        g.adicionaAresta(v3, v2);
-        g.adicionaAresta(v2, v4);
+        // Imprimir o grafo
+        System.out.println("Grafo:");
+        System.out.println(g);
 
+        // Verificar se o grafo tem ciclos
+        System.out.println("Tem ciclo: " + g.temCiclo());
 
-        List<Vertice> ordemTopologica = g.ordenacaoTopologica();
-        System.out.println("Ordem Topológica: " + ordemTopologica);
-
-        System.out.println(g.temCiclo()); // true
-
+        // Realizar ordenação topológica
+        List<Vertice<String>> ordemTopologica = g.ordenacaoTopologica();
+        System.out.println("Ordenação Topológica:");
+        System.out.println(ordemTopologica);
 
     }
     
