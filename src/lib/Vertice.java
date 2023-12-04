@@ -3,6 +3,11 @@ package lib;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author jramso
+ * @author fernandajaimara
+ */
+
 public class Vertice <G> {
 
     private G nome;

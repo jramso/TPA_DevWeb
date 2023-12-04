@@ -9,6 +9,7 @@ import java.util.Stack;
 
 /**
  * @author jramso
+ * @author fernandajaimara
  */
 public class Grafo<G> {
 

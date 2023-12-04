@@ -1,5 +1,10 @@
 package lib;
 
+/**
+ * @author jramso
+ * @author fernandajaimara
+ */
+
 public class Aresta<G> {
 
     private Vertice<G> origem;
